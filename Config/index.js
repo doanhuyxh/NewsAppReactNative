@@ -1,12 +1,10 @@
-const BaseUrl = {
-    url:"adadad",
-}
+import {Color} from "./ColorCustom";
+import {ImgSystemPath} from "./ImgSystemPath";
 
-const ColorCustom = {
-    Red: "red",
-}
+const BaseUrl = "sac";
 
 export {
     BaseUrl,
-    ColorCustom
+    Color,
+    ImgSystemPath
 }

@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import {Text, View} from 'react-native';
 
-function LoadingApp() {
+function NewsDetailScreen() {
 
     return (
         <View>
-            <Text>Load ding app</Text>
+            <Text>NewsDetailScreen</Text>
         </View>
     );
 }
 
 
-export default LoadingApp;
+export default NewsDetailScreen;

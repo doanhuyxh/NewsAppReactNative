@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import {Text, View} from 'react-native';
 
-function MyComponent() {
+function AllNewsScreen() {
 
     return (
         <View>
-            
+            <Text>All News Screen</Text>
         </View>
     );
 }
 
-
-export default MyComponent;
+export default AllNewsScreen;
