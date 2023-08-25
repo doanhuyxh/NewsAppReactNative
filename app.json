@@ -22,10 +22,10 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.doanhuyxh.NewsApp"
+      "package": "com.NewsApp.NewsApp"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/SystemImg/favicon.png"
     },
     "extra": {
       "eas": {

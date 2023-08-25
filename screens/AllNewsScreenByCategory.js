@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
+import ItemNewsCategory from "../components/ItemNewsCategory";
 
 function AllNewsScreenByCategory() {
 
     return (
-        <View>
-            <Text>All News Screen</Text>
-        </View>
+        <ScrollView>
+            <ItemNewsCategory />
+            <ItemNewsCategory />
+            <ItemNewsCategory />
+            <ItemNewsCategory />
+            <ItemNewsCategory />
+        </ScrollView>
     );
 }
 

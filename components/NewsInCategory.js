@@ -5,8 +5,11 @@ import {useNavigation} from "@react-navigation/native";
 
 function NewsInCategory({data}) {
     const navigation = useNavigation();
-    const changeScreen = ()=>{
+    const changeScreen = () => {
         navigation.navigate("AllNewsScreenByCategory")
+    }
+    const changeScreenDetail = ()=>{
+        navigation.navigate("DetailNews")
     }
     const item2 = [];
     const item1 = []
@@ -15,15 +18,17 @@ function NewsInCategory({data}) {
         item1.push(<View className="w-1/2 rounded-2xl p-3 overflow-hidden drop-shadow-3xl bg-gray-200/95"
                          key={i}>
             <TouchableOpacity onPress={changeScreen}>
-            <Image source={ImgTestPath.img1} className="w-40 h-56 object-center m-auto"/>
-            <Text className="text-lg px-1.5 m-auto break-words">Công an TPHCM: Quyết liệt triển khai nhằm bảo TT...</Text>
+                <Image source={ImgTestPath.img1} className="w-40 h-56 object-center m-auto"/>
+                <Text className="text-lg px-1.5 m-auto break-words">Công an TPHCM: Quyết liệt triển khai nhằm bảo
+                    TT...</Text>
             </TouchableOpacity>
         </View>);
         item2.push(<View className="w-1/2 rounded-2xl p-3 overflow-hidden drop-shadow-3xl bg-gray-200/95"
                          key={i}>
             <TouchableOpacity onPress={changeScreen}>
                 <Image source={ImgTestPath.img1} className="w-40 h-56 object-center m-auto"/>
-                <Text className="text-lg px-1.5 m-auto break-words">Công an TPHCM: Quyết liệt triển khai nhằm bảo TT...</Text>
+                <Text className="text-lg px-1.5 m-auto break-words">Công an TPHCM: Quyết liệt triển khai nhằm bảo
+                    TT...</Text>
             </TouchableOpacity>
         </View>);
     }
@@ -33,18 +38,22 @@ function NewsInCategory({data}) {
             <View className="w-full bg-red-600 h-12 rounded-t-2xl">
                 <Text className="text-2xl text-white m-auto ml-3">{data}</Text>
             </View>
-            <View className="w-full">
-                <Image className="w-full h-72" source={ImgTestPath.img1}/>
-            </View>
-            <View className="w-full my-2 mx-2">
-                <Text className="text-black font-medium text-2xl p-0.5">Không thu quá 95% giá trị hợp đồng nếu chưa có
-                    sổ hồng</Text>
-                <Text className="text-sm opacity-50">Nguồn: congan.com.vn</Text>
-                <Text className="text-black text-xl p-0.5 break-words">
-                    (CATP) Nội dung này dự kiến được Bộ Xây dựng bổ sung trong dự án Luật Kinh doanh bất động sản (sửa
-                    đổi) vừa được cơ quan tiếp thu
-                </Text>
-            </View>
+            <TouchableOpacity onPress={changeScreenDetail}>
+                <View className="w-full">
+                    <Image className="w-full h-72" source={ImgTestPath.img1}/>
+                </View>
+                <View className="w-full my-2 mx-2">
+                    <Text className="text-black font-medium text-2xl p-0.5">Không thu quá 95% giá trị hợp đồng nếu chưa
+                        có
+                        sổ hồng</Text>
+                    <Text className="text-sm opacity-50">Nguồn: congan.com.vn</Text>
+                    <Text className="text-black text-xl p-0.5 break-words">
+                        (CATP) Nội dung này dự kiến được Bộ Xây dựng bổ sung trong dự án Luật Kinh doanh bất động sản
+                        (sửa
+                        đổi) vừa được cơ quan tiếp thu
+                    </Text>
+                </View>
+            </TouchableOpacity>
             <View>
                 <View className="flex flex-row">
                     {item1}
@@ -54,7 +63,8 @@ function NewsInCategory({data}) {
                 </View>
             </View>
             <View className="flex-row justify-center h-12 align-middle mt-1">
-                <Text onPress={changeScreen} className="w-1/3 rounded-2xl text-2xl text-lime-50 bg-red-600 text-center mt-1">Xem thêm</Text>
+                <Text onPress={changeScreen}
+                      className="w-1/3 rounded-2xl text-2xl text-lime-50 bg-red-600 text-center mt-1">Xem thêm</Text>
             </View>
         </View>
     );

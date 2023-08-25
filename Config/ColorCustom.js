@@ -1,3 +1,3 @@
-export const Color = {
-    
+export const ColorCustom = {
+    headerColor: "#ef0909"
 }

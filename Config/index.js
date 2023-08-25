@@ -1,10 +1,10 @@
-import {Color} from "./ColorCustom";
+import {ColorCustom} from "./ColorCustom";
 import {ImgSystemPath} from "./ImgSystemPath";
 
 const BaseUrl = "sac";
 
 export {
     BaseUrl,
-    Color,
+    ColorCustom,
     ImgSystemPath
 }
