@@ -4,10 +4,10 @@
     "slug": "NewsApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/SystemImg/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/Loading.png",
+      "image": "./assets/SystemImg/Loading.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.doanhuyxh.NewsApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f0fff2f9-8343-41b0-bc42-3b254bf77fc7"
+      }
     }
   }
 }

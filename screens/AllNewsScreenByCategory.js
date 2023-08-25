@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import {Text, View} from 'react-native';
 
-function VideoDetailScreen() {
+function AllNewsScreenByCategory() {
 
     return (
         <View>
-            <Text>Video Detail</Text>
+            <Text>All News Screen</Text>
         </View>
     );
 }
 
-
-export default VideoDetailScreen;
+export default AllNewsScreenByCategory;
