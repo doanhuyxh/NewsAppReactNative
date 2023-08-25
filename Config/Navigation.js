@@ -5,11 +5,14 @@ import HomeScreen from "../screens/HomeScreen";
 import AllNewsScreenByCategory from "../screens/AllNewsScreenByCategory";
 import NewsDetailScreen from "../screens/NewsDetailScreen";
 import {ColorCustom} from './index.js'
+import {useSelector} from "react-redux";
+import {getTitle} from "../slices/HeaderTitleSlice";
 
 const Stack = createNativeStackNavigator();
 
 function Navigation() {
-    const title = "Trang tin tức"
+    let title = useSelector(getTitle);
+
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Home">

@@ -2,13 +2,17 @@ import React, {Component} from 'react';
 import {Text, View, Image, TouchableOpacity} from 'react-native';
 import {ImgTestPath} from "../Config/ImgTestPath";
 import {useNavigation} from "@react-navigation/native";
+import {useDispatch} from "react-redux";
+import {setTitle} from "../slices/HeaderTitleSlice";
 
 function NewsInCategory({data}) {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
     const changeScreen = () => {
+        dispatch(setTitle(data))
         navigation.navigate("AllNewsScreenByCategory")
     }
-    const changeScreenDetail = ()=>{
+    const changeScreenDetail = () => {
         navigation.navigate("DetailNews")
     }
     const item2 = [];
