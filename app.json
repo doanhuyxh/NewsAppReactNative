@@ -7,7 +7,7 @@
     "icon": "./assets/SystemImg/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/SystemImg/Loading.png",
+      "image": "./assets/SystemImg/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,6 +18,11 @@
       "supportsTablet": true
     },
     "android": {
+      "splash": {
+        "image": "./assets/SystemImg/splash.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
