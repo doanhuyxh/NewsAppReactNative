@@ -2,6 +2,7 @@ import {Provider} from "react-redux"
 import {useEffect, useState} from 'react';
 import Navigation from './Config/Navigation'
 import {store} from "./Config/configureStore";
+import axios from "./Config/Axios";
 import {sendPushNotification, registerForPushNotificationsAsync} from "./Config/Notifications";
 
 export default function App() {
@@ -12,12 +13,6 @@ export default function App() {
     }
     useEffect(() => {
         registerForPushNotificationsAsync().then(r => {});
-        setInterval(()=>{
-            count++;
-            data.title = `lần thứ ${count}`
-            data.body = `${new Date(Date.now()).toLocaleString()}`
-            sendPushNotification(data).then(r => {})
-        }, 6000)
     }, []);
 
     return (
