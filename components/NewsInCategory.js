@@ -30,7 +30,7 @@ function NewsInCategory({cateId, data}) {
         item1.push(<View className="w-1/2 rounded-2xl p-3 overflow-hidden drop-shadow-3xl bg-gray-200/95"
                          key={i}>
             <TouchableOpacity onPress={changeScreen}>
-                <Image source={ImgTestPath.img1} className="w-40 h-56 object-center m-auto"/>
+                <Image source={{uri:ImgTestPath.img3}} className="w-40 h-56 object-center m-auto"/>
                 <Text className="text-lg px-1.5 m-auto break-words">Công an TPHCM: Quyết liệt triển khai nhằm bảo
                     TT...</Text>
             </TouchableOpacity>
@@ -38,7 +38,7 @@ function NewsInCategory({cateId, data}) {
         item2.push(<View className="w-1/2 rounded-2xl p-3 overflow-hidden drop-shadow-3xl bg-gray-200/95"
                          key={i}>
             <TouchableOpacity onPress={changeScreen}>
-                <Image source={ImgTestPath.img1} className="w-40 h-56 object-center m-auto"/>
+                <Image source={{uri:ImgTestPath.img3}} className="w-40 h-56 object-center m-auto"/>
                 <Text className="text-lg px-1.5 m-auto break-words">Công an TPHCM: Quyết liệt triển khai nhằm bảo
                     TT...</Text>
             </TouchableOpacity>
@@ -51,7 +51,7 @@ function NewsInCategory({cateId, data}) {
             </View>
             <TouchableOpacity onPress={changeScreenDetail}>
                 <View className="w-full">
-                    <Image className="w-full h-72" source={ImgTestPath.img1}/>
+                    <Image className="w-full h-72" source={{uri:ImgTestPath.img4}}/>
                 </View>
                 <View className="w-full my-2 mx-2">
                     <Text className="text-black font-medium text-2xl p-0.5">Không thu quá 95% giá trị hợp đồng nếu chưa
