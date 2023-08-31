@@ -9,9 +9,9 @@ export const CategoriesSlice = createSlice({
     initialState,
     reducers: {
         AddCate: (state, action) => {
-            state.categories = [...action.payload];
+            state.categories.push(action.payload);
         },
-        EmptyCate: (sate,action)=> {
+        EmptyCate: (sate)=> {
             sate.categories = [];
         }
     },

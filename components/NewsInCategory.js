@@ -1,22 +1,30 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect} from 'react';
 import {Text, View, Image, TouchableOpacity} from 'react-native';
 import {ImgTestPath} from "../Config/ImgTestPath";
 import {useNavigation} from "@react-navigation/native";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setTitle} from "../slices/HeaderTitleSlice";
+import {getAllNews, Selec5tNewsByCateId} from "../slices/NewsSlice";
+import axios from "../Config/Axios";
 
-function NewsInCategory({data}) {
+function NewsInCategory({cateId, data}) {
+    const item2 = [];
+    const item1 = [];
     const navigation = useNavigation();
     const dispatch = useDispatch();
+    let news = useSelector(getAllNews);
+    console.log("cateid", cateId)
     const changeScreen = () => {
         dispatch(setTitle(data))
-        navigation.navigate("AllNewsScreenByCategory")
+        navigation.navigate("AllNewsScreenByCategory", {cateId})
     }
     const changeScreenDetail = () => {
-        navigation.navigate("DetailNews")
-    }
-    const item2 = [];
-    const item1 = []
+        navigation.navigate("DetailNews")}
+
+    useEffect(() => {
+        axios.get("/api/v1/Items/GetAllProductMobie")
+    }, []);
+
 
     for (let i = 0; i < 4; i++) {
         item1.push(<View className="w-1/2 rounded-2xl p-3 overflow-hidden drop-shadow-3xl bg-gray-200/95"
@@ -36,7 +44,6 @@ function NewsInCategory({data}) {
             </TouchableOpacity>
         </View>);
     }
-
     return (
         <View className="container mb-6 drop-shadow-2xl">
             <View className="w-full bg-red-600 h-12 rounded-t-2xl">

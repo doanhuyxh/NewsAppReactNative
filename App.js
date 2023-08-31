@@ -8,11 +8,18 @@ import {sendPushNotification, registerForPushNotificationsAsync} from "./Config/
 export default function App() {
     let count = 0;
     const data = {
-        title:"",
-        body:"",
+        title:"Thông báo lần thứ 1",
+        body:"Hello",
     }
     useEffect(() => {
-        registerForPushNotificationsAsync().then(r => {});
+        registerForPushNotificationsAsync().then(r => {
+        });
+        setInterval(function () {
+            data.title = `Thông báo tin tức ${count}`
+            data.body=`Ông trum ma túy bị công an bắt giam lần ${count}`
+            count++;
+            sendPushNotification(data).then(r=>{})
+        }, 5000)
     }, []);
 
     return (

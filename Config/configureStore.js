@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import HeaderTitleSlice from "../slices/HeaderTitleSlice.js"
-import {CategoriesSlice} from "../slices/CategorySlice";
+import CategoriesSlice from "../slices/CategorySlice";
+import NewsSlice from "../slices/NewsSlice";
 export const store = configureStore({
     reducer: {
         title : HeaderTitleSlice,
-        category: CategoriesSlice
+        category: CategoriesSlice,
+        news: NewsSlice
     },
 })
