@@ -2,12 +2,14 @@ import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from "expo-constants";
 import {Platform} from 'react-native'
+import {ImgSystemPath} from "./ImgSystemPath";
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
         shouldShowAlert: true,
         shouldPlaySound: true,
         shouldSetBadge: true,
+        icon: ImgSystemPath.notifyIcon
     }),
 });
 
@@ -51,7 +53,7 @@ async function registerForPushNotificationsAsync() {
             lightColor: '#FF231F7C',
         });
     }
-
+    console.log("token", token)
     return token;
 }
 

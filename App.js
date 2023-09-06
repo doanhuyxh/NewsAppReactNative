@@ -2,25 +2,59 @@ import {Provider} from "react-redux"
 import {useEffect, useState} from 'react';
 import Navigation from './Config/Navigation'
 import {store} from "./Config/configureStore";
-import axios from "./Config/Axios";
-import {sendPushNotification, registerForPushNotificationsAsync} from "./Config/Notifications";
+import {Alert, PermissionsAndroid} from 'react-native';
+import messaging from '@react-native-firebase/messaging';
 
 export default function App() {
-    let count = 0;
-    const data = {
-        title:"Thông báo lần thứ 1",
-        body:"Hello",
+    const requestUserPermission = async () => {
+        try {
+            const authStatus = await messaging().requestPermission();
+            const enabled =
+                authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+                authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+            if (enabled) {
+                console.log('Authorization status:', authStatus);
+            }
+        } catch (error) {
+            console.error('Firebase Error:', error);
+        }
     }
     useEffect(() => {
-        registerForPushNotificationsAsync().then(r => {
+        if (requestUserPermission()) {
+            messaging().getToken().then(token=>console.log("token", token))
+        } else {
+            console.log("Failed token status")
+        }
+
+        messaging()
+            .getInitialNotification()
+            .then(remoteMessage => {
+                if (remoteMessage) {
+                    console.log(
+                        'Notification caused app to open from quit state:',
+                        remoteMessage.notification,
+                    );
+                }
+            });
+
+        messaging().onNotificationOpenedApp(remoteMessage => {
+            console.log(
+                'Notification caused app to open from background state:',
+                remoteMessage.notification,
+            );
         });
-        setInterval(function () {
-            data.title = `Thông báo tin tức ${count}`
-            data.body=`Ông trum ma túy bị công an bắt giam lần ${count}`
-            count++;
-            sendPushNotification(data).then(r=>{})
-        }, 5000)
+
+        messaging().setBackgroundMessageHandler(async remoteMessage => {
+            console.log('Message handled in the background!', remoteMessage);
+        });
+
+        const unsubscribe = messaging().onMessage(async remoteMessage => {
+            Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+        });
+
+        return unsubscribe;
     }, []);
+
 
     return (
         <Provider store={store}>

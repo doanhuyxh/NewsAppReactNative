@@ -13,7 +13,6 @@ function NewsInCategory({cateId, data}) {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     let news = useSelector(getAllNews);
-    console.log("cateid", cateId)
     const changeScreen = () => {
         dispatch(setTitle(data))
         navigation.navigate("AllNewsScreenByCategory", {cateId})
