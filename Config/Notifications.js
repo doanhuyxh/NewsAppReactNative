@@ -15,12 +15,13 @@ Notifications.setNotificationHandler({
 
 // Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
 async function sendPushNotification(data) {
-    console.log("sendPushNotification", data)
+    console.log("sendPushNotification", data.android.imageUrlz)
     await Notifications.scheduleNotificationAsync({
         content: {
             title: data.title,
             body: data.body,
-            icon: ImgSystemPath.notifyIcon
+            icon: ImgSystemPath.notifyIcon,
+            imageUrl: `${data.android.imageUrl}`
         },
         trigger: null,
     });

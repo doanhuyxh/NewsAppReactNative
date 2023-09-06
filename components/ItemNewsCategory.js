@@ -3,24 +3,24 @@ import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {ImgTestPath} from "../Config/ImgTestPath";
 import {useNavigation} from "@react-navigation/native";
 
-function ItemNewsCategory() {
+function ItemNewsCategory({data}) {
+    if(data.mainImg == null){
+        data.mainImg = "https://i1-vnexpress.vnecdn.net/2023/09/06/5072937599714c2f1560-169398398-7818-8802-1693984415.jpg?w=680&h=0&q=100&dpr=1&fit=crop&s=BmqGixalJBBwPhydFY9xYQ"
+    }
     const navigation = useNavigation();
     const ChangeScreen = ()=>{
-        navigation.navigate("DetailNews")
+        navigation.navigate("DetailNews", {newsId: data.id})
     }
     return (
-        <TouchableOpacity onPress={ChangeScreen}>
-            <View
-                className="flex flex-1 p-1 py-2 pb-3 rounded-3xl overflow-hidden drop-shadow-2xl bg-amber-50/100 my-1.5">
-                <Image className="w-full h-64" source={{uri:ImgTestPath.img3}}/>
-                <Text className="p-2 text-lg font-bold break-words">Sức mạnh quân sự Trung Quốc bám sát Nga, sắp trở
-                    thành đối thủ chính của Mỹ</Text>
-                <Text className="px-2 text-sm opacity-50">Nguồn: nld.com.vn</Text>
-                <Text className="px-2 text-lg break-words">
-                    (NLDD0)-Trang web Global Firepower (GFP) trong tuần này công bố danh sách xếp hạng sức mạnh quân sự
-                    năm 2023,
-                    trong đó Nga đứng sau Mỹ và Trung Quốc
-                </Text>
+        <TouchableOpacity onPress={ChangeScreen} className="my-0.5">
+            <View className="w-full flex-row h-36 p-1 shadow-amber-100">
+                <View className="w-2/3 h-full px-2 relative">
+                    <Text className="text-lg font-bold mt-0.5">{data.title}</Text>
+                    <Text className="text-sm opacity-50 absolute bottom-0">Nguồn {data.src}</Text>
+                </View>
+                <View className="w-1/3 h-full">
+                    <Image className="w-full h-full rounded" source={{uri:data.mainImg}} />
+                </View>
             </View>
         </TouchableOpacity>
     );

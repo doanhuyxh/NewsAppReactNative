@@ -7,7 +7,6 @@ function ItemCategory({data}) {
     let categorySelected = useSelector(getSelectedCategory);
     const dispatch = useDispatch()
     const ChangeCategory = ()=>{
-        console.log("setSelectedCategory", data.id)
         dispatch(setSelectedCategory(data.id))
     }
 
