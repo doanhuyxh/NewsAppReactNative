@@ -1,7 +1,7 @@
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from "expo-constants";
-import {Platform} from 'react-native'
+import {Platform} from 'react-native';
 import {ImgSystemPath} from "./ImgSystemPath";
 
 Notifications.setNotificationHandler({
@@ -15,10 +15,12 @@ Notifications.setNotificationHandler({
 
 // Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
 async function sendPushNotification(data) {
+    console.log("sendPushNotification", data)
     await Notifications.scheduleNotificationAsync({
         content: {
             title: data.title,
             body: data.body,
+            icon: ImgSystemPath.notifyIcon
         },
         trigger: null,
     });

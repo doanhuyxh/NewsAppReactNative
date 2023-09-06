@@ -1,7 +1,7 @@
 import {ColorCustom} from "./ColorCustom";
 import {ImgSystemPath} from "./ImgSystemPath";
 
-const BaseUrl = "https://banggiahung.lahuwithlove.click";
+const BaseUrl = "http://devtest.ink";
 
 export {
     BaseUrl,

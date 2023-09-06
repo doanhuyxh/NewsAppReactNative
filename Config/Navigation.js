@@ -16,7 +16,7 @@ function Navigation() {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Home">
-                <Stack.Screen name="Home" component={HomeScreen} screenOptions={{headerShown: false}}/>
+                <Stack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
                 <Stack.Screen name="AllNewsScreenByCategory" component={AllNewsScreenByCategory}
                               options={{
                                   headerStyle: {backgroundColor: ColorCustom.headerColor},

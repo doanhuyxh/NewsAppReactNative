@@ -16,6 +16,4 @@ function NewsDetailScreen() {
         </ScrollView>
     );
 }
-
-
 export default NewsDetailScreen;

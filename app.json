@@ -26,7 +26,7 @@
         "backgroundColor": "#ffffff"
       },
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/SystemImg/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.NewsApp.NewsApp"
