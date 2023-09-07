@@ -59,7 +59,7 @@ function HomeScreen() {
         }
     }, [categorySelected])
     return (
-        <SafeAreaView className="pt-0.5">
+        <SafeAreaView className="pt-0.5 bg-yellow-50">
             <ScrollView>
                 <View className="w-full bg-red-700 h-16 justify-center align-middle relative inline-block">
                     <TextInput
