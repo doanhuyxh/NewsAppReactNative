@@ -1,6 +1,6 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {SafeAreaView} from "react-native-safe-area-context";
-import {ScrollView, View, TextInput, TouchableOpacity, Text} from 'react-native';
+import {ScrollView, View, TextInput, TouchableOpacity, Text, Alert} from 'react-native';
 import {useDispatch, useSelector} from "react-redux";
 import {AntDesign} from '@expo/vector-icons';
 import _ from 'lodash';
@@ -23,10 +23,11 @@ function HomeScreen() {
         } else {
             data = listNews.filter(i => i.cateID.includes(categorySelected) && i.title.includes(inputText))
         }
-        let temp =  _.cloneDeep(data)
+        let temp = _.cloneDeep(data)
         setCur(temp)
     }
     useEffect(() => {
+
         axios.get("/api/v1/Items/GetAllCategoryMobile")
             .then(data => {
                 let count = data.category.length;
@@ -34,9 +35,9 @@ function HomeScreen() {
                 for (let i = 0; i < count; i++) {
                     list.push(data.category[i])
                 }
-                let temp =  _.cloneDeep(list)
+                let temp = _.cloneDeep(list)
                 setListCate(temp);
-            });
+            })
         axios.get("/api/v1/Items/GetAllProductMobie")
             .then(data => {
                 let count = data.products.length;
@@ -45,19 +46,24 @@ function HomeScreen() {
                     list.push(data.products[i])
                 }
                 setLoading(false);
-                let temp =  _.cloneDeep(list)
+                let temp = _.cloneDeep(list)
                 setListNews(temp);
                 setCur(temp);
             })
+            .catch(err => {
+                Alert.alert('Lỗi call data 2!', JSON.stringify(err));
+            });
+
+
     }, []);
 
     useLayoutEffect(() => {
         if (categorySelected == 0) {
-            let temp =  _.cloneDeep(listNews)
+            let temp = _.cloneDeep(listNews)
             setCur(temp);
         } else {
             let newss = listNews.filter(i => i.cateID.includes(categorySelected));
-            let temp =  _.cloneDeep(newss)
+            let temp = _.cloneDeep(newss)
             setCur(temp);
         }
     }, [categorySelected])
@@ -66,16 +72,18 @@ function HomeScreen() {
         return (
             <SafeAreaView className="pt-0.5 bg-yellow-50">
                 <ScrollView>
-                    <View className="w-full bg-red-700 h-16 justify-center align-middle relative inline-block">
-                        <TextInput
-                            className="h-12 bg-white px-2 mx-3 rounded-2xl"
-                            placeholder="Nhập từ khóa"
-                            value={inputText}
-                            onChangeText={(text) => setInputText(text)}
-                        />
-                        <TouchableOpacity className="absolute bottom-4 right-6" onPress={HandleSreach}>
-                            <AntDesign name="search1" size={32} color="black"/>
-                        </TouchableOpacity>
+                    <View className="">
+                        <View className="w-full bg-red-700 h-16 justify-center align-middle relative inline-block">
+                            <TextInput
+                                className="h-12 bg-white px-2 mx-3 rounded-2xl"
+                                placeholder="Nhập từ khóa"
+                                value={inputText}
+                                onChangeText={(text) => setInputText(text)}
+                            />
+                            <TouchableOpacity className="absolute bottom-4 right-6" onPress={HandleSreach}>
+                                <AntDesign name="search1" size={32} color="black"/>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                     <View className="w-full h-screen relative">
                         <View className="absolute bottom-1/2 right-1/3">

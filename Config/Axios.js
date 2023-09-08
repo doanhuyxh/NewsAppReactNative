@@ -2,6 +2,12 @@ import axios from 'axios';
 import {BaseUrl} from './index'
 const instance = axios.create({
     baseURL: BaseUrl,
+    timeout: 10000,
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+        Accept: 'application/json',
+        "Content-Type": "application/json"
+    },
 });
 instance.interceptors.response.use(
     (response) => {
