@@ -1,8 +1,9 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {SafeAreaView} from "react-native-safe-area-context";
-import {ScrollView, View, TextInput, TouchableOpacity} from 'react-native';
+import {ScrollView, View, TextInput, TouchableOpacity, Text} from 'react-native';
 import {useDispatch, useSelector} from "react-redux";
 import {AntDesign} from '@expo/vector-icons';
+import _ from 'lodash';
 import ItemCategory from "../components/ItemCategory";
 import axios from "../Config/Axios";
 import {getSelectedCategory} from "../slices/SelectedCategorySlice";
@@ -10,22 +11,20 @@ import ItemNewsCategory from "../components/ItemNewsCategory";
 
 function HomeScreen() {
     let categorySelected = useSelector(getSelectedCategory);
-    const dispatch = useDispatch();
     const [listCate, setListCate] = useState([]);
     const [listNews, setListNews] = useState([]);
     const [cur, setCur] = useState([]);
     const [inputText, setInputText] = useState("");
-
-    const HandleSreach = ()=>{
+    const [loading, setLoading] = useState(true);
+    const HandleSreach = () => {
         let data;
-        if(categorySelected == 0){
-            data = listNews.filter(i=>i.title.includes(inputText))
+        if (categorySelected == 0) {
+            data = listNews.filter(i => i.title.includes(inputText))
+        } else {
+            data = listNews.filter(i => i.cateID.includes(categorySelected) && i.title.includes(inputText))
         }
-        else{
-        data= listNews.filter(i=>i.cateID.includes(categorySelected) && i.title.includes(inputText))
-        }
-        console.log("data search", data.length)
-        setCur(data)
+        let temp =  _.cloneDeep(data)
+        setCur(temp)
     }
     useEffect(() => {
         axios.get("/api/v1/Items/GetAllCategoryMobile")
@@ -35,29 +34,59 @@ function HomeScreen() {
                 for (let i = 0; i < count; i++) {
                     list.push(data.category[i])
                 }
-                setListCate(list);
+                let temp =  _.cloneDeep(list)
+                setListCate(temp);
             });
         axios.get("/api/v1/Items/GetAllProductMobie")
             .then(data => {
                 let count = data.products.length;
-                console.log("news count", count)
                 let list = []
                 for (let i = 0; i < count; i++) {
                     list.push(data.products[i])
                 }
-                setListNews(list);
-                setCur(list);
+                setLoading(false);
+                let temp =  _.cloneDeep(list)
+                setListNews(temp);
+                setCur(temp);
             })
     }, []);
 
     useLayoutEffect(() => {
         if (categorySelected == 0) {
-            setCur(listNews);
+            let temp =  _.cloneDeep(listNews)
+            setCur(temp);
         } else {
             let newss = listNews.filter(i => i.cateID.includes(categorySelected));
-            setCur(newss);
+            let temp =  _.cloneDeep(newss)
+            setCur(temp);
         }
     }, [categorySelected])
+
+    if (loading) {
+        return (
+            <SafeAreaView className="pt-0.5 bg-yellow-50">
+                <ScrollView>
+                    <View className="w-full bg-red-700 h-16 justify-center align-middle relative inline-block">
+                        <TextInput
+                            className="h-12 bg-white px-2 mx-3 rounded-2xl"
+                            placeholder="Nhập từ khóa"
+                            value={inputText}
+                            onChangeText={(text) => setInputText(text)}
+                        />
+                        <TouchableOpacity className="absolute bottom-4 right-6" onPress={HandleSreach}>
+                            <AntDesign name="search1" size={32} color="black"/>
+                        </TouchableOpacity>
+                    </View>
+                    <View className="w-full h-screen relative">
+                        <View className="absolute bottom-1/2 right-1/3">
+                            <Text className="p-2 text-green-500 text-lg ">Đang tải dữ liệu ...</Text>
+                        </View>
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
+        );
+    }
+
     return (
         <SafeAreaView className="pt-0.5 bg-yellow-50">
             <ScrollView>
