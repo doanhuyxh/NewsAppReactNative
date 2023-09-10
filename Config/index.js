@@ -2,7 +2,7 @@ import {ColorCustom} from "./ColorCustom";
 import {ImgSystemPath} from "./ImgSystemPath";
 import { products, category } from "./ImgTestPath";
 
-    const BaseUrl = "http://devtest.ink";
+    const BaseUrl = "https://devtest.ink";
 
 export {
     BaseUrl,

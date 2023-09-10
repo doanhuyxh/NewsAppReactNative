@@ -3,25 +3,21 @@ import * as Notifications from 'expo-notifications';
 import Constants from "expo-constants";
 import {Platform} from 'react-native';
 import {ImgSystemPath} from "./ImgSystemPath";
-
-Notifications.setNotificationHandler({
-    handleNotification: async () => ({
-        shouldShowAlert: true,
-        shouldPlaySound: true,
-        shouldSetBadge: true,
-        icon: ImgSystemPath.notifyIcon
-    }),
-});
+import messaging from '@react-native-firebase/messaging';
 
 // Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
 async function sendPushNotification(data) {
-    console.log("sendPushNotification", data.android.imageUrlz)
+    //console.log("sendPushNotification", data.android.imageUrl)
     await Notifications.scheduleNotificationAsync({
+        identifier: 'image-notification',
         content: {
             title: data.title,
+            subtitle:data.subtitle??"",
             body: data.body,
-            icon: ImgSystemPath.notifyIcon,
-            imageUrl: `${data.android.imageUrl}`
+            sound:true,
+        },
+        android: {
+            imageUrl: data.android.imageUrl
         },
         trigger: null,
     });
@@ -56,6 +52,19 @@ async function registerForPushNotificationsAsync() {
             lightColor: '#FF231F7C',
         });
     }
+
+    Notifications.setNotificationHandler({
+        handleNotification: async () => ({
+            shouldShowAlert: true,
+            shouldPlaySound: true,
+            shouldSetBadge: true,
+            icon: "../assets/SystemImg/icon.png"
+        }),
+    });
+
+    Notifications.addNotificationResponseReceivedListener(response => {
+        console.log("response", response);
+    });
     console.log("token", token)
     return token;
 }

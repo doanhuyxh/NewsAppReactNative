@@ -16,18 +16,22 @@ function Navigation() {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Home">
-                <Stack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="Home" component={HomeScreen} options={{
+                    headerStyle: {backgroundColor: ColorCustom.headerColor},
+                    headerTintColor: 'white',
+                    headerTitle: title
+                }}/>
                 <Stack.Screen name="AllNewsScreenByCategory" component={AllNewsScreenByCategory}
                               options={{
                                   headerStyle: {backgroundColor: ColorCustom.headerColor},
                                   headerTintColor: 'white',
-                                  headerTitle: title
+                                  headerTitle: "Trang chủ"
                               }}/>
                 <Stack.Screen name="DetailNews" component={NewsDetailScreen}
                               options={{
                                   headerStyle: {backgroundColor: ColorCustom.headerColor},
                                   headerTintColor: 'white',
-                                  headerTitle: title
+                                  headerTitle: ""
                               }}/>
             </Stack.Navigator>
         </NavigationContainer>

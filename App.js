@@ -2,13 +2,14 @@ import {Provider} from "react-redux"
 import {useEffect, useState} from 'react';
 import Navigation from './Config/Navigation'
 import {store} from "./Config/configureStore";
-import {Alert} from 'react-native';
-import messaging from '@react-native-firebase/messaging';
-import {sendPushNotification} from "./Config/Notifications";
+import messaging, {firebase} from '@react-native-firebase/messaging';
+import {registerForPushNotificationsAsync, sendPushNotification} from "./Config/Notifications";
 
 export default function App() {
+
     const requestUserPermission = async () => {
         try {
+            await registerForPushNotificationsAsync()
             const authStatus = await messaging().requestPermission();
             const enabled =
                 authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
@@ -20,7 +21,8 @@ export default function App() {
             console.error('Firebase Error:', error);
         }
     }
-    useEffect(() => {
+
+    useEffect(listener => {
 
         //check quyền thông báo và lấy token
         if (requestUserPermission()) {
@@ -50,10 +52,10 @@ export default function App() {
         messaging().setBackgroundMessageHandler(async remoteMessage => {
             console.log('Message handled in the background!', remoteMessage);
         });
+
         // thông báo từ FB
         const unsubscribe = messaging().onMessage(async remoteMessage => {
-            console.log(remoteMessage.notification);
-            await sendPushNotification(remoteMessage.notification);
+          await sendPushNotification(remoteMessage.notification);
         });
         return unsubscribe;
     }, []);
@@ -61,7 +63,7 @@ export default function App() {
 
     return (
         <Provider store={store}>
-                <Navigation/>
+            <Navigation/>
         </Provider>
     );
 }

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    title: "",
+    title: "Trang chủ",
 }
 
 export const HeaderTitleSlice = createSlice({

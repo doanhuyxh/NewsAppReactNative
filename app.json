@@ -11,6 +11,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+        ["expo-notifications",{
+          "icon": "./assets/SystemImg/icon.png"
+        }]
+    ],
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -18,8 +23,15 @@
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 1,
-      "permissions": ["INTERNET", "NOTIFICATIONS"],
+      "versionCode": 2,
+      "permissions": [
+        "INTERNET",
+        "NOTIFICATIONS",
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_EXTERNAL_STORAGE",
+        "ACCESS_NETWORK_STATE",
+        "WAKE_LOCK"
+      ],
       "googleServicesFile": "./google-services.json",
       "splash": {
         "image": "./assets/SystemImg/splash.png",
@@ -37,7 +49,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "f0fff2f9-8343-41b0-bc42-3b254bf77fc7"
+        "projectId": "6bcbccf3-c2a9-4f51-8a82-e41d83e5195f"
       }
     }
   }
