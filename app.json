@@ -12,9 +12,12 @@
       "backgroundColor": "#ffffff"
     },
     "plugins": [
-        ["expo-notifications",{
+      [
+        "expo-notifications",
+        {
           "icon": "./assets/SystemImg/icon.png"
-        }]
+        }
+      ]
     ],
     "assetBundlePatterns": [
       "**/*"
@@ -30,7 +33,8 @@
         "WRITE_EXTERNAL_STORAGE",
         "READ_EXTERNAL_STORAGE",
         "ACCESS_NETWORK_STATE",
-        "WAKE_LOCK"
+        "WAKE_LOCK",
+        "RECORD_AUDIO"
       ],
       "googleServicesFile": "./google-services.json",
       "splash": {

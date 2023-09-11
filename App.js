@@ -24,13 +24,11 @@ export default function App() {
 
     useEffect(listener => {
 
-        //check quyền thông báo và lấy token
         if (requestUserPermission()) {
             messaging().getToken().then(token => console.log("token", token))
         } else {
             console.log("Failed token status")
         }
-        //khởi tạo thông báo
         messaging()
             .getInitialNotification()
             .then(remoteMessage => {
@@ -41,21 +39,17 @@ export default function App() {
                     );
                 }
             });
-        // thông báo khi mở app
         messaging().onNotificationOpenedApp(remoteMessage => {
             console.log(
                 'Notification caused app to open from background state:',
                 remoteMessage.notification,
             );
         });
-        // thông báo khi app chạy nền
         messaging().setBackgroundMessageHandler(async remoteMessage => {
             console.log('Message handled in the background!', remoteMessage);
         });
-
-        // thông báo từ FB
         const unsubscribe = messaging().onMessage(async remoteMessage => {
-          await sendPushNotification(remoteMessage.notification);
+            await sendPushNotification(remoteMessage.notification);
         });
         return unsubscribe;
     }, []);

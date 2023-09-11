@@ -6,7 +6,8 @@ import {
     TextInput,
     TouchableOpacity,
     Text,
-    Alert,
+    Alert, Image,
+    StyleSheet
 } from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import GroupNewsCategory from "../components/GroupNewsCategory";
@@ -16,12 +17,28 @@ import ItemNewsCategory from "../components/ItemNewsCategory";
 import {products, category, BaseUrl} from "../Config";
 import Axios from "../Config/Axios";
 import {setTitle} from "../slices/HeaderTitleSlice";
+import navigation from "../Config/Navigation";
+import {useNavigation} from "@react-navigation/native";
 
 function HomeScreen() {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
     const [newsData, setNewsData] = useState([]);
-    dispatch(setTitle("Trang chủ"))
+    const [news, setNews] = useState([])
+    const navigation = useNavigation()
+    const getRandomElementsFromArray = (array, numberOfElements) => {
+        if (numberOfElements > array.length) {
+            return []
+        }
+        const copyArray = [...array];
+        const randomElements = [];
+        for (let i = 0; i < numberOfElements; i++) {
+            const randomIndex = Math.floor(Math.random() * copyArray.length);
+            randomElements.push(copyArray.splice(randomIndex, 1)[0]);
+        }
+        return randomElements;
+    }
+
     const getCategoryData = () => {
         return axios.get("/api/v1/Items/GetAllCategoryMobile")
             .then((data) => {
@@ -66,36 +83,54 @@ function HomeScreen() {
             .then((results) => {
                 const [categoryData, productData] = results;
                 let temp = []
-                console.log(categoryData)
-                for(let i = 0; i < categoryData.length; i++){
+                for (let i = 0; i < categoryData.length; i++) {
                     let cate = categoryData[i];
-                    let news = productData.filter(k=>k.cateID.includes(cate.id)).splice(0, 4)
+                    let news = productData.filter(k => k.cateID.includes(cate.id)).splice(0, 5)
                     temp.push({cate, news})
                 }
                 setNewsData(temp);
+                setNews(productData)
                 setLoading(false);
             })
     }, []);
 
     if (loading) {
         return (
-            <View className="w-full h-screen relative">
-                <View className="absolute top-1/2 left-1/3">
-                    <Text className="text-lg text-green-600">Đang tải dữ liệu...</Text>
+            <View className="w-full h-screen flex-1 p-20 align-middle justify-center">
+                <View className="">
+                    <Image className="m-auto rounded-3xl" source={require("../assets/animation/loader.gif")}/>
                 </View>
             </View>
         );
     } else {
-
+        let dataRandom = []
         return (
             <ScrollView>
                 {
-                    newsData.map((item, index)=>{
-                        return <GroupNewsCategory category={item.cate} data={item.news}  key={index}/>
+                    newsData.map((item, index) => {
+                        if (index % 3 === 1) {
+                            return (
+                                <View className="flex-col">
+                                    {
+                                        getRandomElementsFromArray(news, 5).map((is, k) => {
+                                            return (<View className="w-full px-3 my-2" key={k}>
+                                                <TouchableOpacity onPress={() => {
+                                                    navigation.navigate("DetailNews", {newsId: is.id})
+                                                }}>
+                                                    <Text className="px-3 opacity-75">-{is.title}</Text>
+                                                </TouchableOpacity>
+                                            </View>)
+                                        })
+                                    }
+                                    <GroupNewsCategory category={item.cate} data={item.news} key={index}/>
+                                </View>
+                            )
+                        } else {
+                            return <GroupNewsCategory category={item.cate} data={item.news} key={index}/>
+                        }
                     })
                 }
             </ScrollView>
-
         );
     }
 }
