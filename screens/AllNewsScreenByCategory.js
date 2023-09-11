@@ -13,7 +13,7 @@ function AllNewsScreenByCategory() {
             .then(data=>{
                 setItems(data.productsInCategory)
             })
-    }, [])
+    }, [categoryId])
     return (
         <ScrollView>
             <ScrollView>

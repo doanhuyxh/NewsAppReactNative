@@ -19,6 +19,7 @@ import Axios from "../Config/Axios";
 import {setTitle} from "../slices/HeaderTitleSlice";
 import navigation from "../Config/Navigation";
 import {useNavigation} from "@react-navigation/native";
+import { AddCate, EmptyCate } from "../slices/CategorySlice";
 
 function HomeScreen() {
     const dispatch = useDispatch();
@@ -82,6 +83,9 @@ function HomeScreen() {
         Promise.all([getCategoryData(), getProductData()])
             .then((results) => {
                 const [categoryData, productData] = results;
+                dispatch(EmptyCate);
+                dispatch(AddCate(categoryData));
+
                 let temp = []
                 for (let i = 0; i < categoryData.length; i++) {
                     let cate = categoryData[i];

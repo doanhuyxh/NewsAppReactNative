@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    categories: [{"id": 0, "nameCate": "Trang chủ"}],
+    categories: [],
 }
 
 export const CategoriesSlice = createSlice({
@@ -9,10 +9,10 @@ export const CategoriesSlice = createSlice({
     initialState,
     reducers: {
         AddCate: (state, action) => {
-            state.categories.push(action.payload);
+            state.categories = action.payload;
         },
         EmptyCate: (sate)=> {
-            sate.categories = [{"id": 0, "nameCate": "Trang chủ"}];
+            sate.categories = [];
         }
     },
 })
