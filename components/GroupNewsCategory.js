@@ -34,7 +34,7 @@ function GroupNewsCategory({data, category}) {
     }
 
     for (let i = 3; i < 5; i++) {
-        item2.push(<View className="w-1/2 rounded-2xl overflow-hidden px-2 drop-shadow-3xl bg-gray-200/95 mt-4"
+        item2.push(<View className="w-1/2 rounded-2xl overflow-hidden px-2 drop-shadow-3xl bg-gray-200/95 mt-8"
                          key={i}>
             <TouchableOpacity onPress={() => {
                 navigation.navigate("DetailNews", {newsId: data[i].id})
@@ -54,8 +54,12 @@ function GroupNewsCategory({data, category}) {
             <View className="flex-col">
                 <View className="columns-12">
                     <Image source={{uri: data[0].mainImg}} className="w-full h-80 object-cover"/>
-                    <Text className="text-xl font-bold px-1.5">{data[0].title}</Text>
-                    <Text className="opacity-50 p-1.5">Nguồn {data[0].src}</Text>
+                    <View className="p-2">
+                        <Text className="text-xl font-bold px-1.5">{data[0].title}</Text>
+                        <View className="w-fit flex-row mt-1">
+                            <Text className="border-0.5 rounded-xl opacity-50 p-1.5">Nguồn {data[0].src.replace("https://www.", "").replace(":", "").replace("/", "")}</Text>
+                        </View>
+                    </View>
                 </View>
                 <View>
                     <View className="flex flex-row">

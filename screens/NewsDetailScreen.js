@@ -5,6 +5,7 @@ import axios from "../Config/Axios";
 import {BaseUrl} from "../Config";
 import HTML from 'react-native-render-html';
 import {useDispatch} from "react-redux";
+
 function NewsDetailScreen() {
     const dispatch = useDispatch()
     const { width } = useWindowDimensions();
@@ -25,7 +26,7 @@ function NewsDetailScreen() {
                 setTitle(data.newsData.title)
                 setMainImg(data.newsData.mainImg)
                 setDes(data.newsData.description)
-                setSrc(`Nguồn ${data.newsData.src}`)
+                setSrc(`Nguồn ${data.newsData.src.replace("https://www.", "").replace(":", "").replace("/", "")}`)
             })
     }, [newsId])
     return (

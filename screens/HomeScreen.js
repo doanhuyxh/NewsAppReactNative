@@ -12,12 +12,8 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import GroupNewsCategory from "../components/GroupNewsCategory";
 import axios from "../Config/Axios";
-import {getSelectedCategory} from "../slices/SelectedCategorySlice";
-import ItemNewsCategory from "../components/ItemNewsCategory";
 import {products, category, BaseUrl} from "../Config";
 import Axios from "../Config/Axios";
-import {setTitle} from "../slices/HeaderTitleSlice";
-import navigation from "../Config/Navigation";
 import {useNavigation} from "@react-navigation/native";
 import { AddCate, EmptyCate } from "../slices/CategorySlice";
 
@@ -114,7 +110,7 @@ function HomeScreen() {
                     newsData.map((item, index) => {
                         if (index % 3 === 1) {
                             return (
-                                <View className="flex-col">
+                                <View className="flex-col" key={index}>
                                     {
                                         getRandomElementsFromArray(news, 5).map((is, k) => {
                                             return (<View className="w-full px-3 my-2" key={k}>
